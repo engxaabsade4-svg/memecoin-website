@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEGEN DAFTAR — Wixii Aad Ka Ogaan Lahayd Ganacsiga Memecoin-ka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0b0c;
+    --bg-raised: #141416;
+    --yellow: #f5c400;
+    --pink: #ff4d8d;
+    --green: #00d97e;
+    --red: #ff3b3b;
+    --ink: #f2f2f0;
+    --ink-dim: #9a9a9f;
+    --line: #2a2a2d;
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+
+  /* caution stripe divider */
+  .stripe{
+    height:10px;
+    background: repeating-linear-gradient(135deg, var(--yellow) 0 18px, #0b0b0c 18px 36px);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 5vw;
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,11,12,0.85);
+    backdrop-filter: blur(8px);
+  }
+  .logo{
+    font-family:var(--font-display);
+    font-size:1.3rem;
+    letter-spacing:0.5px;
+  }
+  .logo span{color:var(--yellow);}
+  .navlinks{display:flex; gap:28px; font-family:var(--font-mono); font-size:0.85rem;}
+  .navlinks a{text-decoration:none; color:var(--ink-dim); transition:color .2s;}
+  .navlinks a:hover{color:var(--pink);}
+  @media(max-width:800px){.navlinks{display:none;}}
+
+  /* ---------- TICKER ---------- */
+  .ticker-wrap{
+    background:var(--bg-raised);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    padding:10px 0;
+  }
+  .ticker{
+    display:flex;
+    gap:40px;
+    white-space:nowrap;
+    animation: scroll-left 22s linear infinite;
+    font-family:var(--font-mono);
+    font-size:0.85rem;
+  }
+  .ticker span{display:flex; gap:8px; align-items:center;}
+  .up{color:var(--green);}
+  .down{color:var(--red);}
+  @keyframes scroll-left{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:10vh 5vw 12vh;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    color:var(--yellow);
+    font-size:0.85rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:inline-block;
+    border:1px solid var(--yellow);
+    padding:5px 12px;
+  }
+  h1{
+    font-family:var(--font-display);
+    font-size:clamp(2.4rem, 7vw, 5.2rem);
+    line-height:1.02;
+    max-width:16ch;
+    margin-bottom:24px;
+  }
+  h1 .hi{color:var(--pink);}
+  .hero-sub{
+    max-width:640px;
+    color:var(--ink-dim);
+    font-size:1.15rem;
+    margin-bottom:36px;
+  }
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-mono);
+    font-weight:700;
+    padding:14px 26px;
+    border-radius:2px;
+    text-decoration:none;
+    font-size:0.9rem;
+    letter-spacing:0.5px;
+    display:inline-block;
+    transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--yellow); color:#0b0b0c;}
+  .btn-ghost{border:1px solid var(--line); color:var(--ink);}
+
+  /* candle chart decoration */
+  .chart{
+    margin-top:60px;
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+    height:160px;
+    max-width:900px;
+  }
+  .candle{
+    width:14px;
+    position:relative;
+    border-radius:1px;
+  }
+  .candle::before{
+    content:'';
+    position:absolute;
+    left:50%; top:-14px;
+    width:2px; height:14px;
+    background:inherit;
+    transform:translateX(-50%);
+  }
+  .candle.g{background:var(--green);}
+  .candle.r{background:var(--red);}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:10vh 5vw; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:48px; flex-wrap:wrap;}
+  .tag{font-family:var(--font-mono); color:var(--yellow); font-size:0.9rem;}
+  h2{font-family:var(--font-display); font-size:clamp(1.8rem,4vw,2.8rem);}
+
+  /* ---------- WHAT IS ---------- */
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+  @media(max-width:800px){.grid-2{grid-template-columns:1fr;}}
+  .lead{font-size:1.15rem; color:var(--ink-dim); max-width:56ch;}
+  .fact-list{list-style:none; margin-top:28px; display:flex; flex-direction:column; gap:16px;}
+  .fact-list li{
+    display:flex; gap:14px; align-items:flex-start;
+    font-family:var(--font-body);
+  }
+  .fact-list .dot{
+    min-width:8px; height:8px; border-radius:50%; background:var(--pink);
+    margin-top:9px;
+  }
+
+  /* ---------- HOW-TO STEPS ---------- */
+  .steps{display:flex; flex-direction:column;}
+  .step{
+    display:grid;
+    grid-template-columns:100px 1fr;
+    gap:24px;
+    padding:32px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .step:last-child{border-bottom:none;}
+  .step-num{
+    font-family:var(--font-mono);
+    font-size:2.6rem;
+    color:var(--line);
+    font-weight:700;
+  }
+  .step h3{font-family:var(--font-display); font-size:1.3rem; margin-bottom:10px; color:var(--ink);}
+  .step p{color:var(--ink-dim); max-width:60ch;}
+
+  /* ---------- RISK BOARD ---------- */
+  .risk-board{
+    background:var(--bg-raised);
+    border:1px solid var(--line);
+    padding:5vh 5vw;
+    position:relative;
+  }
+  .risk-board::before{
+    content:'DIGNIIN — RISK';
+    position:absolute;
+    top:-14px; left:5vw;
+    background:var(--red);
+    color:#0b0b0c;
+    font-family:var(--font-mono);
+    font-weight:700;
+    font-size:0.75rem;
+    padding:4px 10px;
+    letter-spacing:1px;
+  }
+  .risk-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:28px; margin-top:20px;}
+  .risk-card{border-left:3px solid var(--red); padding-left:18px;}
+  .risk-card h4{font-family:var(--font-mono); font-size:1rem; color:var(--red); margin-bottom:8px;}
+  .risk-card p{color:var(--ink-dim); font-size:0.95rem;}
+
+  /* ---------- GLOSSARY ---------- */
+  .gloss{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .gloss-item{background:var(--bg); padding:26px;}
+  .gloss-term{font-family:var(--font-mono); color:var(--yellow); font-size:0.95rem; margin-bottom:8px;}
+  .gloss-def{color:var(--ink-dim); font-size:0.92rem;}
+
+  /* ---------- TIPS ---------- */
+  .tip-row{
+    display:flex;
+    gap:24px;
+    overflow-x:auto;
+    padding-bottom:10px;
+  }
+  .tip-card{
+    min-width:260px;
+    background:var(--bg-raised);
+    border:1px solid var(--line);
+    padding:26px;
+    flex:1;
+  }
+  .tip-card .num{font-family:var(--font-mono); color:var(--pink); font-size:0.85rem; margin-bottom:12px;}
+  .tip-card h4{font-family:var(--font-display); font-size:1.05rem; margin-bottom:10px;}
+  .tip-card p{color:var(--ink-dim); font-size:0.9rem;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:6vh 5vw;
+    border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px;
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    color:var(--ink-dim);
+  }
+  .disclaimer{
+    max-width:760px;
+    color:var(--ink-dim);
+    font-size:0.85rem;
+    line-height:1.7;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">DEGEN<span>.</span>DAFTAR</div>
+  <div class="navlinks">
+    <a href="#maxay">Maxay yihiin</a>
+    <a href="#sida">Sida loo Ganacsado</a>
+    <a href="#khataro">Khatarta</a>
+    <a href="#tallo">Talooyin</a>
+    <a href="#erayo">Erayada</a>
+  </div>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker" id="tickerTrack"></div>
+</div>
+
+<section class="hero">
+  <span class="eyebrow">Waxbarasho ganacsi • Ma aha lacag-taliye</span>
+  <h1>Memecoin-ka waa <span class="hi">kaftan</span>, laakiin lacagtaadu wax bay ku dhacaysaa.</h1>
+  <p class="hero-sub">
+    DEGEN DAFTAR waa hal-abuur fahamsan oo af-Soomaali ah oo kuu sharaxaya sida coin-yada kaftanka ah (memecoins)
+    u socdaan, sida dad badan ugu lumiyaan, iyo talooyinka aad u baahan tahay ka hor inta aanad "buy" taabin.
+  </p>
+  <div class="cta-row">
+    <a href="#sida" class="btn btn-primary">Bilow Barashada →</a>
+    <a href="#khataro" class="btn btn-ghost">Eeg Khatarta Marka Hore</a>
+  </div>
+
+  <div class="chart" id="chartRow"></div>
+</section>
+
+<section id="maxay">
+  <div class="section-head">
+    <span class="tag">01 / ASAASKA</span>
+    <h2>Memecoin muxuu yahay?</h2>
+  </div>
+  <div class="grid-2">
+    <p class="lead">
+      Memecoin waa nooc coin crypto ah oo aan lagu dhisin farsamo ama macnaha teknolojiga, laakiin waxaa lagu dhisay
+      dhaqan internet — sawir kaftan ah (meme), eray la yaqaan, ama xiiso bulsheed. Qiimaheeda kama imaan
+      shirkad ka dambeysa ama nidaam la isticmaalo — waxay ka timaadaa dareenka dadka, hadalka Twitter/X,
+      iyo sida ay isugu keeni karto dad badan si degdeg ah.
+    </p>
+    <ul class="fact-list">
+      <li><span class="dot"></span> Tusaale caan ah: Dogecoin, Shiba Inu, iyo boqolaal kale oo isku mid ah oo maalin walba soo baxa.</li>
+      <li><span class="dot"></span> Qiimahoodu wuxuu isbedeli karaa boqolaal boqolkiiba (%) hal maalin gudaheed — kor ama hoos.</li>
+      <li><span class="dot"></span> Dad badan oo "founder" ah ayaa awood weyn ku haya coin-ka, taasoo micnaheedu yahay in dhinac yar uu wax badan gaari karo.</li>
+      <li><span class="dot"></span> Marka dareenka bulshadu is-beddelo, coin-kaasi wuxuu noqon karaa mid aan waxba lahayn dhawr daqiiqo gudahood.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sida">
+  <div class="section-head">
+    <span class="tag">02 / HABKA</span>
+    <h2>Sida loogu talagalay in la ganacsado (fikrad guud)</h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div>
+        <h3>Dooro wallet iyo exchange</h3>
+        <p>Dad badan waxay isticmaalaan wallet-yo sida MetaMask ama Phantom, ama exchange caan ah, si ay u iibsadaan
+          oo u iibiyaan coin-yada. Wallet-kaaga waxaa loo yaqaan meesha lacagtaadu ku jirto — nuxurkiisa
+          ilaali sida lacag caadi ah.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div>
+        <h3>Baadh isha coin-ka</h3>
+        <p>Fiiri liiska hantida (holders), da'da coin-ka, iyo halka lacagta wax-ku-ool (liquidity) ay ku jirto.
+          Coin cusub oo aan la hubin, khatar ayey badanaa sitaa.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div>
+        <h3>Iibso — hadii aad go'aansato</h3>
+        <p>Marka la iibsado, qiimuhu wuxuu isbedeli karaa daqiiqad kasta. Ganacsatada waxay isticmaalaan chart-yo
+          si ay u eegaan halka qiimuhu u socdo (candle-yada cas iyo cagaaran ee kore).</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div>
+        <h3>Iibi ama sug</h3>
+        <p>Qaar waxay go'aansadaan inay iibiyaan haddii faa'iido la helo, kuwa kalena way sii haystaan.
+          Go'aankan waa mid mar walba khatar leh — ma jiro qof hubaal kuu sheegi kara wixii dhici doona.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="khataro">
+  <div class="risk-board">
+    <div class="risk-grid">
+      <div class="risk-card">
+        <h4>LUMIN DHAMAYSTIRAN</h4>
+        <p>Waxaa jira suurtagal ah in coin-ku uu qiimihiisu gaaro eber saacado gudahood — lacagta la geliyay
+          dhamaanteed way lumi kartaa.</p>
+      </div>
+      <div class="risk-card">
+        <h4>"RUG PULL"</h4>
+        <p>Qaar ka mid ah abaabulayaasha coin-ka waxay si xun dabinno u dhigaan, kadibna lacagta wax-ku-oolka
+          ah bay qaataan, iyagoo iibiyayaasha ku daba dayn si aan macno lahayn.</p>
+      </div>
+      <div class="risk-card">
+        <h4>PUMP &amp; DUMP</h4>
+        <p>Dad waaweyn ayaa qiimaha kor u qaada si ay dad kale ugu soo jiitaan, kadibna si degdeg ah u iibiya
+          — kuwa danbeeya ayaa lumiya.</p>
+      </div>
+      <div class="risk-card">
+        <h4>DAREEN AYAA WAX WALBA XAKAMEEYA</h4>
+        <p>Ma jiraan xog dhab ah oo lagu saleeyo qiimaha; wax kasta waxay ku xirantahay hadal-bulsheed iyo
+          niyad-jabin ama xamaasad degdeg ah.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tallo">
+  <div class="section-head">
+    <span class="tag">03 / TALOOYIN</span>
+    <h2>Haddii aad go'aansatid inaad tijaabiso</h2>
+  </div>
+  <div class="tip-row">
+    <div class="tip-card">
+      <div class="num">TALO — 01</div>
+      <h4>Ha gelin wax aanad awoodin inaad lumiso</h4>
+      <p>Marka hore u tixgali lacagtaas sidii mid aad si buuxda diyaar u tahay inaad lumiso, ma aha maalgashi la isku halayn karo.</p>
+    </div>
+    <div class="tip-card">
+      <div class="num">TALO — 02</div>
+      <h4>Baadh horta abaabulayaasha coin-ka</h4>
+      <p>Eeg haddii ay muujinayaan cida ay yihiin, iyo haddii wallet-yo waaweyni ay hayaan qayb aad u badan coin-ka.</p>
+    </div>
+    <div class="tip-card">
+      <div class="num">TALO — 03</div>
+      <h4>Ha ku dagaalamin xamaasadda</h4>
+      <p>Marka dad badani ka hadlayaan coin hal mar, waa calaamad khatar leh, ma aha hubaal faa'iido.</p>
+    </div>
+    <div class="tip-card">
+      <div class="num">TALO — 04</div>
+      <h4>Qorshe cad u yeelo iibinta</h4>
+      <p>Ka hor inta aanad iibsan, go'aan gaar ah samayso goorma aad iibin lahayd — cabsi iyo faragelin degdeg ah way khaldaan.</p>
+    </div>
+  </div>
+</section>
+
+<section id="erayo">
+  <div class="section-head">
+    <span class="tag">04 / ERAYADA</span>
+    <h2>Ereyo ganacsi oo lagama maarmaan</h2>
+  </div>
+  <div class="gloss">
+    <div class="gloss-item">
+      <div class="gloss-term">HODL</div>
+      <div class="gloss-def">Sii hayn coin-ka in kasta oo qiimuhu hoos u dhaco, halkii la iibin lahaa.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">FOMO</div>
+      <div class="gloss-def">Cabsida "waan seegi doonaa fursad" — sababta caadiga ah ee dad ku degdegaan iibsiga.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">LIQUIDITY (WAX-KU-OOL)</div>
+      <div class="gloss-def">Lacagta la geliyay si loo taageero iibinta iyo iibsiga coin-ka si fudud.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">MARKET CAP</div>
+      <div class="gloss-def">Qiimaha guud ee dhammaan coin-yada jira marka la isku daro.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">WHALE</div>
+      <div class="gloss-def">Qof ama wallet haysta qayb aad u badan oo coin-ka ah, kaas oo kaligiis kor ama hoos u qaadi kara qiimaha.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">SLIPPAGE</div>
+      <div class="gloss-def">Farqiga u dhexeeya qiimaha aad filaysay iyo qiimaha dhabta ah ee lagu iibsaday/iibiyay.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="disclaimer">
+    Boggan waa waxbarasho keliya oo ku saabsan sida ganacsiga memecoin-ka u shaqeeyo, mana aha talo maalgashi,
+    lama tixgeliyaa hab lacag lagu kordhiyo. Suuqa crypto-gu waa mid aad khatar u badan; qof kasta oo ka fikiraya
+    inuu ganacsado waa inuu sameeyaa baadhitaankiisa (own research) oo la tashado xirfadle maaliyadeed haddii loo baahdo.
+  </div>
+  <div>DEGEN DAFTAR — 2026</div>
+</footer>
+
+<script>
+  // ticker data (fake illustrative prices)
+  const coins = [
+    {n:'DOGE', c:'up', v:'+4.2%'},
+    {n:'SHIB', c:'down', v:'-6.8%'},
+    {n:'PEPE', c:'up', v:'+18.3%'},
+    {n:'FLOKI', c:'down', v:'-2.1%'},
+    {n:'WIF', c:'up', v:'+31.0%'},
+    {n:'BONK', c:'down', v:'-9.4%'},
+    {n:'MOG', c:'up', v:'+7.7%'},
+    {n:'TURBO', c:'down', v:'-3.3%'},
+  ];
+  const track = document.getElementById('tickerTrack');
+  let html = '';
+  for(let i=0;i<2;i++){
+    coins.forEach(c=>{
+      html += `<span>${c.n} <span class="${c.c}">${c.v}</span></span>`;
+    });
+  }
+  track.innerHTML = html;
+
+  // decorative candle chart
+  const chart = document.getElementById('chartRow');
+  const heights = [40,70,55,90,60,120,80,150,100,130,70,160];
+  heights.forEach((h,i)=>{
+    const d = document.createElement('div');
+    d.className = 'candle ' + (Math.random() > 0.45 ? 'g' : 'r');
+    d.style.height = h + 'px';
+    chart.appendChild(d);
+  });
+</script>
+
+</body>
+</html>
